@@ -6,6 +6,8 @@ import retrofit2.http.GET
 import retrofit2.http.Url
 
 interface ApiServices {
+    @GET("users")
+    fun getUsers(): Call<List<Users>>
     @GET
-    fun getUsers(@Url url: String?): Call<List<Users>?>?
+    fun getRepos(@Url url: String): Call<Users>
 }
