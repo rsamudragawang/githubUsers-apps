@@ -1,9 +1,10 @@
 package com.ganargatul.githubuser.view.main
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ganargatul.githubuser.R
 import com.ganargatul.githubuser.adapter.AdapterUsers
 import com.ganargatul.githubuser.model.Users
+import com.ganargatul.githubuser.view.detail.DetailUsers
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var recyclerview: RecyclerView
@@ -37,7 +40,10 @@ class MainActivity : AppCompatActivity() {
         progressBar.visibility = View.GONE
         adapter= AdapterUsers(baseContext,users){
             val nowItems =Users(it.login,it.avatar_url)
-//            startActivity<DetailPastEvent>("Data" to nowItems)
+            val intent = Intent(baseContext, DetailUsers::class.java)
+            intent.putExtra("Data",nowItems)
+            startActivity(intent)
+//            startActivity<DetailUsers>("Data" to nowItems)
         }
 
         recyclerview.adapter = adapter
